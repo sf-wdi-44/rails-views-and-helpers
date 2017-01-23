@@ -131,7 +131,7 @@ We add the ERB from partials files into a view with `render`. Here are examples 
     </body>
   ```
 
-  ... and templates for the content of each page.
+  ... and templates for the content of each page, one of which might start out:
 
   ```
   <%= image_tag(@goat.image_url) %>
@@ -142,7 +142,7 @@ We add the ERB from partials files into a view with `render`. Here are examples 
   Remember: `yield` is where the current page content will be rendered.
 </details>
 
-Another alternative would be to move the header with menu and/or the footer into a partial instead.  This option would be best when for example we only use the menu on some pages, but not all. For instance, if the home page uses a hero image in place of the header, we should move that header with menu section to a partial.
+We can also move the header and/or the footer into a partial.  This option would be best when for example we only use the menu on some pages, but not all. For instance, if the home page uses a hero image in place of the header, we should move that header with menu section to a partial.
 
 2)  What would our layout, view, and template look like if the header with menu section is a partial?
 
