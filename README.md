@@ -10,7 +10,7 @@ We want pages users can see and interact with! And we want to take advantage of 
 ### Objectives
 *After this lesson, developers will be able to:*
 
-- Describe how layouts, templates & views work together.
+- Describe how layouts, view templates, and partial templates work together.
 - Recognize rails url helpers and path helpers.
 - Explain benefits of using Rails form helpers and link helpers.
 - Find and determine correct syntax for Rails form helpers and link helpers.
@@ -18,34 +18,20 @@ We want pages users can see and interact with! And we want to take advantage of 
 ### Where should we be now?
 *Before this workshop, developers should already be able to:*
 
-- Spin up a Rails app with a route and controller for a home page view.
-- Incorporate routes, controller, and model for a single resource
+- Start a Rails app with a route and controller for a home page view.
+- Incorporate routes, a controller, and a model for a single resource.
 - Read and write routes.
 
-### Resources
 
-The following can resources are great additions to this Readme:
-
-* [Glossary](glossary.md)
-* Rails Guides:
-  * [Action View Overview](http://guides.rubyonrails.org/action_view_overview.html)
-  * [Layouts and Rendering](http://guides.rubyonrails.org/layouts_and_rendering.html)
-  * [Form Helpers](http://guides.rubyonrails.org/form_helpers.html)
-* API documentation:
-  * ActionView's [FormHelper](http://api.rubyonrails.org/classes/ActionView/Helpers/FormHelper.html)
-  * ActionController's [`render`](http://api.rubyonrails.org/classes/ActionController/Base.html#class-ActionController::Base-label-Renders)
-  * ActionController's [`redirect_to`](http://api.rubyonrails.org/classes/ActionController/Base.html#class-ActionController::Base-label-Redirects)
-
-
-## Putting Together the Page
-
-### Layouts
+## Layouts & Views
 
 In Rails, the pages a user sees are rendered as a combination of a layout template and a view template. The view template, in turn, might be built up with one or more smaller "partial" templates.
 
-We can use layouts for the lines of HTML that link site-wide CSS and JavaScript files and other material like a footer that stays the same across many pages from multiple controllers.
+We can use layouts for the lines of HTML that link site-wide CSS and JavaScript files. We can also use it for material like a footer that stays the same across many pages from multiple controllers.
 
-Views are rendered into the `<%= yield %>` tag in a layout.
+<img src="https://raw.githubusercontent.com/sf-wdi-34/angular-routing/master/views_layouts_malcolm.png" alt="single goat show page with details">
+
+Views are always rendered into the `<%= yield %>` tag in a layout.
 
 When the app is created, Rails will automatically add a layout `application.html.erb` in `app/views/layouts/application.html.erb`. This layout already contains a yield statement and all the links to CSS and JavaScript files in the head part of the HTML document.
 
@@ -53,7 +39,12 @@ When the app is created, Rails will automatically add a layout `application.html
 
 View templates contain all the content that's specific to one page.  
 
-Each controller will have its own directory inside `app/views` to contain the view templates used by that controller.
+Each controller will have its own directory inside `app/views` to contain the view templates used by that controller. For fully CRUD-able RESTful resources, there will be views for:
+
+ - index  
+ - show  
+ - new  
+ - edit  
 
 
 ### Partials
@@ -114,30 +105,37 @@ We add the ERB from partials files into a view with `render`. Here are examples 
 
 1)  How can we split up pages into layout and views if the website is structured like this:
 
-  ```
-    -----    html head section     -----
-    -----    header with menu      -----
-    -----    current page content  -----
-    -----    footer                -----
-  ```
+  <img src="https://raw.githubusercontent.com/sf-wdi-34/angular-routing/master/goats_app.png" width="600px" alt="goat app screenshots">
 
   <details><summary>click for an answer</summary>
 
-  In Rails, the page head will already be in the application layout. We should probably move the top menu and the footer into the layout, too.  
+  In Rails, the page `<head>` will already be in the application layout.
+
+  We can move the top menu and the footer into the layout, or we could create partials to make sure the layout stays short.
 
   This give us a layout...
 
   ```
-    -----    html head section     -----
-    -----    header with menu      -----
-    -----    <%= yield %>          -----
-    -----    footer                -----
+    <!DOCTYPE html>
+    <head>
+        <!-- metadata, CSS link, JS link -->
+    </head>
+    <body>
+      <header>
+        <!-- all header & menu html.erb -->
+      </header>
+      <%= yield %>
+      <footer>
+        <!-- all footer html.erb -->
+      </footer>
+    </body>
   ```
 
   ... and templates for the content of each page.
 
   ```
-  -----    current page content  -----
+  <%= image_tag(@goat.image_url) %>
+  <!-- continue single page html.erb -->
   ```
 
 
@@ -153,32 +151,30 @@ Another alternative would be to move the header with menu and/or the footer into
   **Layout:**
 
   ```
-    -----    html head section     -----
-    -----    <%= yield %>          -----
-    -----    footer                -----
+    <!DOCTYPE html>
+    <head>
+        <!-- metadata, CSS link, JS link -->
+    </head>
+    <body>
+      <%= yield %>
+      <footer>
+        <!-- all footer html.erb -->
+      </footer>
+    </body>
   ```
 
   **View Templates:**
 
   ```
-  -----  <%= render "shared/header" %>   -----
-  -----       current page content       -----
+  <%= render "shared/header" %>
+  <!-- continue current page content -->
   ```
-  and
+  or, on another page,
   ```
-  -----  <%= render "hero_image" %>  -----
-  -----     current page content     -----
+  <%= render "shared/hero_image" %>
+  <!-- continue current page content -->
   ```
 
-  **Partials:**
-
-  ```
-  ----- header with menu -----
-  ```
-  and
-  ```
-  ----- hero image -----
-  ```
 
   </details>
 
@@ -591,7 +587,20 @@ Research one of the methods below, and prepare to give a 2 sentence explanation 
 
 ### Closing Thoughts
 
-- Describe how layouts, templates & views work together.
+- Describe how layouts, views & partial work together.
 - How can we figure out what path helpers are available?
 - Why would we use `form_for` and `link_to`?
 - Where would you look for syntax for Rails form helpers?
+
+
+### Resources
+
+* [Glossary](glossary.md)
+* Rails Guides:
+  * [Action View Overview](http://guides.rubyonrails.org/action_view_overview.html)
+  * [Layouts and Rendering](http://guides.rubyonrails.org/layouts_and_rendering.html)
+  * [Form Helpers](http://guides.rubyonrails.org/form_helpers.html)
+* API documentation:
+  * ActionView's [FormHelper](http://api.rubyonrails.org/classes/ActionView/Helpers/FormHelper.html)
+  * ActionController's [`render`](http://api.rubyonrails.org/classes/ActionController/Base.html#class-ActionController::Base-label-Renders)
+  * ActionController's [`redirect_to`](http://api.rubyonrails.org/classes/ActionController/Base.html#class-ActionController::Base-label-Redirects)
