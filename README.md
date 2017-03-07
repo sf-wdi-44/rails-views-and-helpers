@@ -5,13 +5,13 @@
 <!-- framing the "why" in big-picture/real world examples -->
 *This workshop is important because:*
 
-We want pages users can see and interact with! And we want to take advantage of how easy Rails makes views if we follow the "Rails way!"
+We want pages that users can see and interact with! And we want to take advantage of how easy Rails makes views if we follow the "Rails way".
 
 ### Objectives
 *After this lesson, developers will be able to:*
 
 - Describe how layouts, templates & views work together.
-- Recognize rails url helpers and path helpers.
+- Recognize Rails URL helpers and path helpers.
 - Explain benefits of using Rails form helpers and link helpers.
 - Find and determine correct syntax for Rails form helpers and link helpers.
 
@@ -21,21 +21,6 @@ We want pages users can see and interact with! And we want to take advantage of 
 - Spin up a Rails app with a route and controller for a home page view.
 - Incorporate routes, controller, and model for a single resource
 - Read and write routes.
-
-### Resources
-
-The following can resources are great additions to this Readme:
-
-* [Glossary](glossary.md)
-* Rails Guides:
-  * [Action View Overview](http://guides.rubyonrails.org/action_view_overview.html)
-  * [Layouts and Rendering](http://guides.rubyonrails.org/layouts_and_rendering.html)
-  * [Form Helpers](http://guides.rubyonrails.org/form_helpers.html)
-* API documentation:
-  * ActionView's [FormHelper](http://api.rubyonrails.org/classes/ActionView/Helpers/FormHelper.html)
-  * ActionController's [`render`](http://api.rubyonrails.org/classes/ActionController/Base.html#class-ActionController::Base-label-Renders)
-  * ActionController's [`redirect_to`](http://api.rubyonrails.org/classes/ActionController/Base.html#class-ActionController::Base-label-Redirects)
-
 
 ## Putting Together the Page
 
@@ -62,16 +47,16 @@ Partials allow us to take a portion of a template and move it into a separate fi
 
 **Check for Understanding:** Why might we want to separate out portions of our HTML view templates?
 
-<details><summary>click for a few ideas</summary>
-* A best practice is to always keep every template small. A rule of thumb would be to keep templates to about 50 lines for readability. If we wrote the bulk of our HTML directly in view templates, we'd quickly exceed this limit.
-* We might have content that is repeated on more than one page associated with a controller - partials help us reuse HTML code for this content.
-* Separating code into partials makes our views more modular and easier to change.
+<details><summary>Ideas</summary>
+- A best practice is to always keep every template small. A rule of thumb would be to keep templates to about 50 lines for readability. If we wrote the bulk of our HTML directly in view templates, we'd quickly exceed this limit.
+- We might have content that is repeated on more than one page associated with a controller - partials help us reuse HTML code for this content.
+- Separating code into partials makes our views more modular and easier to change.
 </details>
 
-Using partials:
+#### Using partials:
 
 * Partials are always named starting with an underscore: `app/views/products/_form.html.erb` or `app/views/shared/_menu.rb`.  
-* Partials can be called directly from inside a view file.  `<%= render "form" %>`.  Note that you don't  specify the `_` when rendering the partial.
+* Partials can be called directly from inside a view file:  `<%= render "form" %>`.  Note that you don't  specify the `_` when rendering the partial.
 * You can pass data to a partial: `<%= render partial: "customer", object: @new_customer %>`
 
 You can also create partial layouts, but those are less common in apps of the size we're dealing with.
@@ -110,7 +95,7 @@ We add the ERB from partials files into a view with `render`. Here are examples 
   <%= render partial: "product", collection: @products %>
   ```
 
-###Check for Understanding: Using Partials and Layouts
+#### Check for Understanding: Using Partials and Layouts
 
 1)  How can we split up pages into layout and views if the website is structured like this:
 
@@ -125,7 +110,7 @@ We add the ERB from partials files into a view with `render`. Here are examples 
 
   In Rails, the page head will already be in the application layout. We should probably move the top menu and the footer into the layout, too.  
 
-  This give us a layout...
+  This will give us a layout...
 
   ```
     -----    html head section     -----
@@ -142,10 +127,10 @@ We add the ERB from partials files into a view with `render`. Here are examples 
 
 
   Remember: `yield` is where the current page content will be rendered.
-</details>
+
 
 Another alternative would be to move the header with menu and/or the footer into a partial instead.  This option would be best when for example we only use the menu on some pages, but not all. For instance, if the home page uses a hero image in place of the header, we should move that header with menu section to a partial.
-
+</details>
 2)  What would our layout, view, and template look like if the header with menu section is a partial?
 
   <details><summary>click for an answer</summary>
@@ -182,6 +167,7 @@ Another alternative would be to move the header with menu and/or the footer into
 
   </details>
 
+---
 
 A very common example of using partials in Rails is moving code for a new/edit form into a partial.
 
@@ -219,20 +205,6 @@ Take the form out of both pages and put it inside a partial.  Result:
 ```
 
 
-**Check for Understanding**
-
-An app might has `app/views/products` with the files listed below.  Explain what each file is for.
-
-```
-_form.html.erb
-edit.html.erb
-index.html.erb
-index.json.jbuilder
-new.html.erb
-show.html.erb
-show.json.jbuilder
-```
-
 
 ## Using Views with Rails
 
@@ -241,14 +213,14 @@ Now that we've gone over how layout templates, view templates, and partial templ
 
 Every route in Rails will execute a method inside a controller. In Rails, the basic logic for rendering an HTML view is straightforward.  When the method is executed:
 
-1. Rails looks for a folder inside `views` corresponding to the controller's name (folder `posts` for `PostsController`).
+1. Rails looks for a directory inside `views` corresponding to the controller's name (directory `posts` for `PostsController`).
 2. Inside that folder, Rails looks for an `.html.erb` file with a name matching the method's name.
 
 For example, if we visit `http://localhost:3000/posts` in the browser, that GET request should be routed to the PostsController#index method (because of RESTful conventions).  
-By default controller methods will render views files that match the controller method name. So when Rails executes the code in `index`, it will look for and render a template located in `app/views/posts/index.html.erb` unless we tell it to do something else.  
+
+By default, controller methods will render views files that match the controller method name. So when Rails executes the code in `index`, it will look for and render a template located in `app/views/posts/index.html.erb` unless we tell it to do something else.  
 
 **Check for Understanding:** Which RESTful controller actions in Rails usually render an HTML view? What are their purposes?
-
 <details><summary>click for a list</summary>
   * `index` - display a list of all the records for one type of resource
   * `show` - display details of one singe record
@@ -257,10 +229,7 @@ By default controller methods will render views files that match the controller 
 </details>
 
 
-In the rest of the controller actions, you *won't* use the default rendering behavior.
-
-**Check for Understanding**: Which RESTful controller actions in Rails DO NOT render an HTML view? What are their purposes?
-
+And which RESTful controller actions in Rails DO NOT render an HTML view? What are their purposes?
 <details><summary>click for a list</summary>
   * `create` - work with the database to create a record (based on form input)
   * `update` - work with the database to update one record (based on form input)
@@ -268,7 +237,7 @@ In the rest of the controller actions, you *won't* use the default rendering beh
 </details>
 
 
-Lets take a look at a `create` action:
+Let's take a look at a `create` action:
 
 ```ruby
 # inside app/controllers/PostsController.rb
@@ -297,6 +266,21 @@ We've seen two ways to do something other than rendering the HTML view that matc
 
 > HOORAY!  Rails 5 comes bundled with a `jbuilder` gem that helps us create JSON views instead of HTML. Why is this awesome?
 
+
+
+**Check for Understanding**
+
+An app might have a directory `app/views/products` with the files listed below.  Explain in ~4 words what each file is for.
+
+```
+_form.html.erb
+edit.html.erb
+index.html.erb
+index.json.jbuilder
+new.html.erb
+show.html.erb
+show.json.jbuilder
+```
 
 ## Helpers in Rails
 
@@ -398,7 +382,7 @@ Image delete button
 
 #### PUT, PATCH, DELETE
 
-Most browsers don't support PUT, PATCH & DELETE as form submission methods.  Rails however has a _work-around_ for this.  
+Most browsers don't support PUT, PATCH & DELETE as form submission methods.  Rails, however, has a _work-around_ for this.  
 
 Rails adds a hidden form field and processes this on a POST request, internally changing the request type.  
 
@@ -430,57 +414,55 @@ form_tag(search_path, method: "patch")
 As we saw with `button_to`, Rails can generate forms for us.  There are two main kinds of helpers we can use to generate forms:  [FormTagHelper](http://api.rubyonrails.org/classes/ActionView/Helpers/FormTagHelper.html) and [FormBuilderHelper](http://api.rubyonrails.org/classes/ActionView/Helpers/FormBuilder.html).  You can read more about both in the [Form Helpers Rails Guide](http://guides.rubyonrails.org/form_helpers.html)
 
 * FormTagHelper's `form_tag` is very general, and it's often used for method/action combinations that don't map directly to a RESTful route for one of our resources.
+<details><summary>click for example</summary>
 
-  <details><summary>click for example</summary>
+>this ERB:
 
-  >this ERB:
+>```erb
+<%= form_tag("/search", method: "get") do %>
+  <%= label_tag(:q, "Search for:") %>
+  <%= text_field_tag(:q) %>
+  <%= submit_tag("Search") %>
+<% end %>
+```
 
-  >```erb
-  <%= form_tag("/search", method: "get") do %>
-    <%= label_tag(:q, "Search for:") %>
-    <%= text_field_tag(:q) %>
-    <%= submit_tag("Search") %>
-  <% end %>
-  ```
+>generates HTML:
 
-  >generates HTML:
+>```html
+<form accept-charset="UTF-8" action="/search" method="get">
+  <input name="utf8" type="hidden" value="&#x2713;" />
+  <label for="q">Search for:</label>
+  <input id="q" name="q" type="text" />
+  <input name="commit" type="submit" value="Search" />
+</form>
+```
 
-  >```html
-  <form accept-charset="UTF-8" action="/search" method="get">
-    <input name="utf8" type="hidden" value="&#x2713;" />
-    <label for="q">Search for:</label>
-    <input id="q" name="q" type="text" />
-    <input name="commit" type="submit" value="Search" />
-  </form>
-  ```
-
-  </details>
+</details>
 
 * FormBuilderHelper's `form_for` is intended to work with our resources and RESTful routes. It does a lot to help you pre-fill values.
 
+<details><summary>click for example</summary>
 
-  <details><summary>click for example</summary>
+>this ERB:
 
-  >this ERB:
+>```erb
+<%= form_for @article, url: {action: "create"}, html: {class: "nifty_form"} do |f| %>
+  <%= f.text_field :title %>
+  <%= f.text_area :body, size: "60x12" %>
+  <%= f.submit "Create" %>
+<% end %>
+```
+> generates HTML:
 
-  >```erb
-  <%= form_for @article, url: {action: "create"}, html: {class: "nifty_form"} do |f| %>
-    <%= f.text_field :title %>
-    <%= f.text_area :body, size: "60x12" %>
-    <%= f.submit "Create" %>
-  <% end %>
-  ```
-  > generates HTML:
+>```html
+<form accept-charset="UTF-8" action="/articles" method="post" class="nifty_form">
+  <input id="article_title" name="article[title]" type="text" />
+  <textarea id="article_body" name="article[body]" cols="60" rows="12"></textarea>
+  <input name="commit" type="submit" value="Create" />
+</form>
+```
 
-  >```html
-  <form accept-charset="UTF-8" action="/articles" method="post" class="nifty_form">
-    <input id="article_title" name="article[title]" type="text" />
-    <textarea id="article_body" name="article[body]" cols="60" rows="12"></textarea>
-    <input name="commit" type="submit" value="Create" />
-  </form>
-  ```
-
-  </details>
+</details>
 
 ### Form Builder and `form_for`
 
@@ -540,53 +522,53 @@ def article_params
   params.require(:article).permit(:title, :body)
 end
 ```
-<!--
+
 ## Independent Practice: View Helper Research
 
 Research one of the methods below, and prepare to give a 2 sentence explanation about where it is used and what it does to everyone!
 
 
-* `csrf_meta_tags`
+1. `csrf_meta_tags`
 
-* `stylesheet_link_tag`
+1. `stylesheet_link_tag`
 
-* `javascript_include_tag`
+1. `javascript_include_tag`
 
-* `audio_tag`
+1. `audio_tag`
 
-* `image_tag`
+1. `image_tag`
 
-* `image_url`
+1. `image_url`
 
-* `video_tag`
+1. `video_tag`
 
-* `time_ago_in_words`
+1. `time_ago_in_words`
 
-* `hidden_field` or `f.hidden_field`
+1. `hidden_field` or `f.hidden_field`
 
-* `password_field`
+1. `password_field`
 
-* `color_field`
+1. `color_field`
 
-* `f.label`
+1. `f.label`
 
-* `check_box`
+1. `check_box`
 
-* `collection_check_boxes`
+1. `collection_check_boxes`
 
-* `select` (form builder)
+1. `select` (form builder)
 
-* `date_field`
+1. `date_field`
 
-* `date_select`
+1. `date_select`
 
-* `truncate`
+1. `truncate`
 
-* `pluralize`
+1. `pluralize`
 
-* `simple_format`
+1. `simple_format`
 
-* `number_to_human` -->
+1. `number_to_human`
 
 
 ### Closing Thoughts
@@ -595,3 +577,17 @@ Research one of the methods below, and prepare to give a 2 sentence explanation 
 - How can we figure out what path helpers are available?
 - Why would we use `form_for` and `link_to`?
 - Where would you look for syntax for Rails form helpers?
+
+### Resources
+
+The following can resources are great additions to this Readme:
+
+1. [Glossary](glossary.md)
+* Rails Guides:
+  * [Action View Overview](http://guides.rubyonrails.org/action_view_overview.html)
+  * [Layouts and Rendering](http://guides.rubyonrails.org/layouts_and_rendering.html)
+  * [Form Helpers](http://guides.rubyonrails.org/form_helpers.html)
+* API documentation:
+  * ActionView's [FormHelper](http://api.rubyonrails.org/classes/ActionView/Helpers/FormHelper.html)
+  * ActionController's [`render`](http://api.rubyonrails.org/classes/ActionController/Base.html#class-ActionController::Base-label-Renders)
+  * ActionController's [`redirect_to`](http://api.rubyonrails.org/classes/ActionController/Base.html#class-ActionController::Base-label-Redirects)
