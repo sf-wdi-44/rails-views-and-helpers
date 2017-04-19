@@ -222,18 +222,22 @@ By default, controller methods will render views files that match the controller
 
 **Check for Understanding:** Which RESTful controller actions in Rails usually render an HTML view? What are their purposes?
 <details><summary>click for a list</summary>
+
   * `index` - display a list of all the records for one type of resource
   * `show` - display details of one singe record
   * `new` - display a form for users to create a new record
   * `edit` - display a form for users to update a record
+
 </details>
 
 
 And which RESTful controller actions in Rails DO NOT render an HTML view? What are their purposes?
 <details><summary>click for a list</summary>
+
   * `create` - work with the database to create a record (based on form input)
   * `update` - work with the database to update one record (based on form input)
   * `destroy` - work with the database to destroy one record
+
 </details>
 
 
@@ -254,9 +258,9 @@ end
 
 <details><summary>click for explanation</summary>
 
-Based on the result of `@post.save`, the method will execute either the code in the `if` or in the `else`.
+  Based on the result of `@post.save`, the method will execute either the code in the `if` or in the `else`.
 
-If the new post `@post` correctly saves, the response will be a redirect to that post's show page. If the new post doesn't save correctly, the new post form view is rendered again. Note that neither one of these renders a `create.html.erb` file.
+  If the new post `@post` correctly saves, the response will be a redirect to that post's show page. If the new post doesn't save correctly, the new post form view is rendered again. Note that neither one of these renders a `create.html.erb` file.
 
 </details>
 
