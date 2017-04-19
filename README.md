@@ -355,24 +355,26 @@ As a team, list differences between `link_to` and `button_to`.  Come up with an 
 
 
 <details><summary>click to see `link_to` examples</summary>
-  Simple link:
-  ```rb
-  link_to "Profile", @profile
-  # => <a href="/profiles/1">Profile</a>
-  ```
 
-  Setting class and id in HTML:
+Simple link:
+```rb
+link_to "Profile", @profile
+# => <a href="/profiles/1">Profile</a>
+```
 
-  ```ruby
-  link_to "Articles", articles_path, id: "news", class: "article"
-  # => <a href="/articles" class="article" id="news">Articles</a>
-  ```
+Setting class and id in HTML:
+
+```ruby
+link_to "Articles", articles_path, id: "news", class: "article"
+# => <a href="/articles" class="article" id="news">Articles</a>
+```
+
 </details>
 
 <details><summary>click for example of `button_to`</summary>
 
 Image delete button
-```rb
+```erb
 <%= button_to "Delete Image", { action: "delete", id: @image.id },
                                 method: :delete, data: { confirm: "Are you sure?" } %>
 # => "<form method="post" action="/images/delete/1" class="button_to">
@@ -420,9 +422,7 @@ As we saw with `button_to`, Rails can generate forms for us.  There are two main
 * FormTagHelper's `form_tag` is very general, and it's often used for method/action combinations that don't map directly to a RESTful route for one of our resources.
 <details><summary>click for example</summary>
 
->this ERB:
-
->```erb
+```erb
 <%= form_tag("/search", method: "get") do %>
   <%= label_tag(:q, "Search for:") %>
   <%= text_field_tag(:q) %>
@@ -430,9 +430,9 @@ As we saw with `button_to`, Rails can generate forms for us.  There are two main
 <% end %>
 ```
 
->generates HTML:
+Generated html:
 
->```html
+```html
 <form accept-charset="UTF-8" action="/search" method="get">
   <input name="utf8" type="hidden" value="&#x2713;" />
   <label for="q">Search for:</label>
@@ -447,18 +447,16 @@ As we saw with `button_to`, Rails can generate forms for us.  There are two main
 
 <details><summary>click for example</summary>
 
->this ERB:
-
->```erb
+```erb
 <%= form_for @article, url: {action: "create"}, html: {class: "nifty_form"} do |f| %>
   <%= f.text_field :title %>
   <%= f.text_area :body, size: "60x12" %>
   <%= f.submit "Create" %>
 <% end %>
 ```
-> generates HTML:
+Generated html:
 
->```html
+```html
 <form accept-charset="UTF-8" action="/articles" method="post" class="nifty_form">
   <input id="article_title" name="article[title]" type="text" />
   <textarea id="article_body" name="article[body]" cols="60" rows="12"></textarea>
