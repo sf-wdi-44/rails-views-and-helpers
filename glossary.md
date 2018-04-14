@@ -30,7 +30,7 @@ Render the partial in `shared/_footer.html.erb` in a view
 <%= render "shared/footer" %>
 ```
 
-Render a partial in `_product.html.erb` and pass it a variable.
+Render a partial in `_product.html.erb` and pass it a local variable.
 ```erb
 # index.html.erb
 <% @products.each do |product| %>
@@ -42,6 +42,7 @@ Render a partial in `_product.html.erb` and pass it a variable.
   Name: <%= product.name %>
 </div>
 ```
+ > Note that explicitly specifying `partial:` is required when passing additional options such as `locals:`.
 
 
 ## View Helper Methods
