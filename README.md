@@ -88,13 +88,13 @@ We add the ERB from partials files into a view with `render`. Here are examples 
   <% end %>
   ```
 
-  > Note that explicitly specifying `partial:` is required when passing certain additional options such as `locals:`.
+  > Note that explicitly specifying `partial:` is required when passing certain additional options such as `locals:`. For more details, see the [official docs](http://guides.rubyonrails.org/layouts_and_rendering.html#using-partials).
 
   Rails win! There's also a shorter syntax for the common pattern of repeating a partial for all items in a collection:
 
   ```erb
   <%- # inside app/views/products/index.html.erb %>
-  <%= render partial: "product", collection: @products %>
+  <%= render "product", collection: @products %>
   ```
 
   See more options on partials and layouts in the [official docs](http://guides.rubyonrails.org/layouts_and_rendering.html#using-partials).
@@ -413,13 +413,13 @@ form_tag(search_path, method: "patch")
 
 > Tip: run `rake routes` and look at the Prefix column to see what `_path` helpers are available.
 
-| Path helper          | using this path helper  with link_to |
-|---------------------| -------------------------------------------|
-| `turkeys_path`        | `link_to "view all turkeys", turkeys_path` |
-| `new_turkey_path`     | `link_to "create a new turkey", new_turkey_path` |
-| `edit_turkey_path`    | `link_to "edit this turkey", edit_turkey @turkey` |
-| `turkey_path`         | `link_to "view this turkey", turkey_path @turkey ` |
-| `turkey_path`         | `link_to "view this turkey", turkey_path 12` |
+| Path helper        | using this path helper  with link_to               |
+| ------------------ | -------------------------------------------------- |
+| `turkeys_path`     | `link_to "view all turkeys", turkeys_path`         |
+| `new_turkey_path`  | `link_to "create a new turkey", new_turkey_path`   |
+| `edit_turkey_path` | `link_to "edit this turkey", edit_turkey @turkey`  |
+| `turkey_path`      | `link_to "view this turkey", turkey_path @turkey ` |
+| `turkey_path`      | `link_to "view this turkey", turkey_path 12`       |
 
 ## Form Helpers
 
